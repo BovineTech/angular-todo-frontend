@@ -16,6 +16,8 @@ import { employeeReducer } from "./store/employee/Employee.Reducer";
 import { empEffects } from "./store/employee/Employee.Effects";
 import { todoEffects } from "./store/todo/Todo.Effects";
 import { todoReducer } from "./store/todo/Todo.Reducer";
+import { authReducer } from "./store/auth/auth.reducer";
+import { AuthEffects } from "./store/auth/auth.effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,8 +26,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     provideToastr(),
-    provideStore({ todo: todoReducer }),
-    provideEffects([todoEffects]),
+    provideStore({ todo: todoReducer, auth: authReducer, employee: employeeReducer }),
+    provideEffects([todoEffects, empEffects, AuthEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ],
 };

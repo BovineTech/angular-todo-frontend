@@ -1,10 +1,56 @@
-.mat-mdc-form-field {
+.main {
   width: 90%;
+  margin: 0 auto;
+  padding: 20px 0px;
+  text-align: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: flex-start;
 }
 
-.main {
-  padding: 20px;
+/* Ensures items are spaced evenly */
+mat-toolbar {
+  background-color: slateblue;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+/* Right side items (Version and GitHub button) */
+.version {
+  margin-right: 10px;
+}
+
+mat-icon {
+  margin-left: 8px;
+}
+
+a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-button {
+  border: 1px solid white !important;
+  margin: 0 5px;
+  background-color: slateblue;
+  color: white !important;
+  border-radius: 4px !important;
 }

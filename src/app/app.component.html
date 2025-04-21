@@ -1,11 +1,18 @@
-<main class="main">
+
+<mat-toolbar color="primary">
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
-    |
     <a routerLink="/todo" routerLinkActive="active">Todo List</a>
-    |
     <a routerLink="/employee" routerLinkActive="active">Employee List</a>
+    <a routerLink="/directive" routerLinkActive="active">Directive Test</a>
+    <!-- <a routerLink="/login" routerLinkActive="active">Login</a> -->
+    <!-- <a routerLink="/register" routerLinkActive="active">Register</a> -->
   </nav>
-</main>
+  <span class="example-spacer"></span>
+  <button routerLink="/login" mat-button class="mat-button">Login</button>
+  <button routerLink="/register" mat-button class="mat-button">Register</button>
+</mat-toolbar>
 
-<router-outlet />
+<main class="main">
+  <router-outlet />
+</main>
