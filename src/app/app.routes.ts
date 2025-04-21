@@ -10,9 +10,8 @@ import { authGuard, unAuthGuard } from "./auth/auth.guard";
 export const routes: Routes = [
   {
     path: "",
-    title: "Dashboard",
-    component: DashboardComponent,
-    canActivate: [unAuthGuard]
+    redirectTo: "/dashboard",
+    pathMatch: "full",
   },
   {
     path: "dashboard",
