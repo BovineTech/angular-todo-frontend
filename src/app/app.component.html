@@ -1,5 +1,5 @@
 
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="isLoggedIn()">
   <nav>
     <a routerLink="/" routerLinkActive="active">Home</a>
     <a routerLink="/todo" routerLinkActive="active">Todo List</a>
@@ -9,8 +9,10 @@
     <!-- <a routerLink="/register" routerLinkActive="active">Register</a> -->
   </nav>
   <span class="example-spacer"></span>
-  <button routerLink="/login" mat-button class="mat-button">Login</button>
-  <button routerLink="/register" mat-button class="mat-button">Register</button>
+  <!-- <button routerLink="/login" mat-button class="mat-button">Login</button> -->
+  <!-- <button routerLink="/register" mat-button class="mat-button">Register</button> -->
+  <mat-label style="color: chocolate;">{{ username }}</mat-label>
+  <button routerLink="/login" mat-button class="mat-button" (click)="OnLogout()">LogOut</button>
 </mat-toolbar>
 
 <main class="main">

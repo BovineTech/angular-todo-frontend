@@ -9,7 +9,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { registerUser } from "../../store/auth/auth.actions";
+import { registerUser } from "../../store/auth/Auth.Action";
 import { CommonModule } from "@angular/common";
 
 @Component({

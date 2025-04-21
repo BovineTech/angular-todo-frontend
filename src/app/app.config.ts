@@ -16,8 +16,8 @@ import { employeeReducer } from "./store/employee/Employee.Reducer";
 import { empEffects } from "./store/employee/Employee.Effects";
 import { todoEffects } from "./store/todo/Todo.Effects";
 import { todoReducer } from "./store/todo/Todo.Reducer";
-import { authReducer } from "./store/auth/auth.reducer";
-import { AuthEffects } from "./store/auth/auth.effects";
+import { authReducer } from "./store/auth/Auth.Reducer";
+import { AuthEffects } from "./store/auth/Auth.Effects";
 
 export const appConfig: ApplicationConfig = {
   providers: [

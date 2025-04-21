@@ -10,7 +10,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { loginUser } from "../../store/auth/auth.actions";
+import { loginUser } from "../../store/auth/Auth.Action";
 
 @Component({
   selector: "app-login",
@@ -51,5 +51,9 @@ export class LoginComponent {
       // After successful login, navigate to the todo page (or any other page)
       // this.router.navigate(["/todo"]);
     }
+  }
+  OnRegister() {
+    console.log("Register clicked");
+    this.router.navigate(["/register"]);
   }
 }
