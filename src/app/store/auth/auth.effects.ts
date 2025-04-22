@@ -3,8 +3,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { AuthService } from '../../service/auth.service';
-import { loginUser, loginUserSuccess, loginUserFailure, registerUser, registerUserSuccess, registerUserFailure } from './Auth.Action';
+import { loginUser, loginUserSuccess, loginUserFailure, registerUser, registerUserSuccess, registerUserFailure, emptyAction, getUser } from './Auth.Action';
 import { Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthEffects {
@@ -12,6 +13,7 @@ export class AuthEffects {
 
   actions$ = inject(Actions);
   authService = inject(AuthService);
+  toastr = inject(ToastrService);
   router = inject(Router);
 
   _registerUser = createEffect(() =>
@@ -19,12 +21,18 @@ export class AuthEffects {
       ofType(registerUser),
       switchMap(action =>
         this.authService.register(action).pipe(
-          map(response => {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/login']);
-            return registerUserSuccess({user: response.user });
+          switchMap(response => {
+            return of(
+              localStorage.setItem('token', response.token),
+              this.Showalert("Register Successfully.", "pass"),
+              this.router.navigate(['/login']),
+              registerUserSuccess({ user: response.user })
+            );
         }),
-          catchError(error => of(registerUserFailure({ error: error.message })))
+          catchError(error => of(
+            this.Showalert("Register Failed.", "fail"),
+            registerUserFailure({ error: error.message })
+          ))
         )
       )
     )
@@ -35,14 +43,51 @@ export class AuthEffects {
       ofType(loginUser),
       switchMap(action =>
         this.authService.login(action).pipe(
-          map(response => {
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']);
-            return loginUserSuccess({ user: response.user });
+          switchMap(response => {
+            return of(
+              localStorage.setItem('token', response.token),
+              this.Showalert("Login Successfully.", "pass"),
+              this.router.navigate(['/dashboard']),
+              loginUserSuccess({ user: response.user }),
+          );
         }),
-          catchError(error => of(loginUserFailure({ error: error.message })))
+          catchError(error => of(
+            this.Showalert("Login Failed.", "fail"),
+            loginUserFailure({ error: error.message })
+          ))
         )
       )
     )
   );
+
+  // _getUser = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(getUser),
+  //     switchMap(action =>
+  //       this.authService.login(action).pipe(
+  //         switchMap(response => {
+  //           return of(
+  //             localStorage.setItem('token', response.token),
+  //             this.Showalert("Login Successfully.", "pass"),
+  //             this.router.navigate(['/dashboard']),
+  //             loginUserSuccess({ user: response.user }),
+  //         );
+  //       }),
+  //         catchError(error => of(
+  //           this.Showalert("Login Failed.", "fail"),
+  //           loginUserFailure({ error: error.message })
+  //         ))
+  //       )
+  //     )
+  //   )
+  // );
+
+  Showalert(message: string, response: string) {
+      if (response == "pass") {
+        this.toastr.success(message);
+      } else {
+        this.toastr.error(message);
+      }
+      return emptyAction();
+    }
 }
